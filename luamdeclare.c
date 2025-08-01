@@ -66,7 +66,7 @@ LuaCEmbedResponse *luamdeclare_transform_file(LuaCEmbed  *args){
    return response;
 }
 
-int luaopen_my_lib(lua_State *state) {
+int luaopen_luamdeclare(lua_State *state) {
     LuaCEmbed *l = newLuaCEmbedLib(state);
     LuaCEmbed_add_callback(l, "transform_dir", luamdeclare_transform_dir);
     LuaCEmbed_add_callback(l, "transform_file", luamdeclare_transform_file);
