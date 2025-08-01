@@ -22,8 +22,8 @@ LuaCEmbedResponse  *luamdeclare_transform_dir(LuaCEmbed *args) {
     }
     bool include_paths = true;
     
-    if(LuaCEmbedTable_get_type_prop(entries, "include_paths") != LUA_CEMBED_NOT_FOUND) {
-        include_paths = LuaCembedTable_get_bool_prop(entries, "include_paths");
+    if(LuaCEmbedTable_get_type_prop(entries, "includepaths") != LUA_CEMBED_NIL) {
+        include_paths = LuaCembedTable_get_bool_prop(entries, "includepaths");
     }
 
     if(LuaCEmbed_has_errors(args)) {
@@ -31,8 +31,8 @@ LuaCEmbedResponse  *luamdeclare_transform_dir(LuaCEmbed *args) {
         return LuaCEmbed_send_error(error_msg);
     }
     const char *starts_with = NULL;
-    if(LuaCEmbedTable_get_type_prop(entries, "starts_with") != LUA_CEMBED_NOT_FOUND) {
-        starts_with = LuaCembedTable_get_string_prop(entries, "starts_with");
+    if(LuaCEmbedTable_get_type_prop(entries, "startswith") != LUA_CEMBED_NOT_FOUND) {
+        starts_with = LuaCembedTable_get_string_prop(entries, "startswith");
     }
 
     if(LuaCEmbed_has_errors(args)) {
@@ -40,8 +40,8 @@ LuaCEmbedResponse  *luamdeclare_transform_dir(LuaCEmbed *args) {
         return LuaCEmbed_send_error(error_msg);
     }
     const char *ends_with = NULL;
-    if(LuaCEmbedTable_get_type_prop(entries, "ends_with") != LUA_CEMBED_NOT_FOUND) {
-        ends_with = LuaCembedTable_get_string_prop(entries, "ends_with");
+    if(LuaCEmbedTable_get_type_prop(entries, "endswith") != LUA_CEMBED_NOT_FOUND) {
+        ends_with = LuaCembedTable_get_string_prop(entries, "endswith");
     }
 
     if(LuaCEmbed_has_errors(args)) {

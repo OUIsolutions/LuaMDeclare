@@ -32,7 +32,7 @@ if darwin.argv.one_of_args_exist("build_local") then
 end
 
 if darwin.argv.one_of_args_exist("build_release") then
-    darwin.dtw.copy_any_overwriting("extra/starter.lua","release/Mdeclare/Mdeclare.lua")
+    darwin.dtw.copy_any_overwriting("starter.lua","release/Mdeclare/Mdeclare.lua")
 
     -- Create a new container machine
     local machine = darwin.ship.create_machine("debian:latest")
