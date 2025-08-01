@@ -12,6 +12,10 @@
 ---@field transform_content fun(content:string):string
 ---@field transform_dir fun(dir:MdeclareDirProps):string
 
+local info = debug.getinfo(1, "S")
+local path = info.source:match("@(.*/)") or ""
+
+
 local lib_path = ''
 
 if os.getenv("HOME") then
