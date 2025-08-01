@@ -23,3 +23,38 @@ for i=1,#DEPS do
     local content = cached_get_webpage(dep.url)
     darwin.dtw.write_file("dependencies/" .. dep.save_as, content)
 end
+
+local builded = false
+if darwin.argv.one_of_args_exist("build_local") then
+    darwin.dtw.copy_any_overwriting("starter.lua","release/Mdeclare/Mdeclare.lua")
+    os.execute("gcc luamdeclare.c -shared  -fpic -o release/Mdeclare/Mdeclare.so")
+    builded = true
+end
+
+if darwin.argv.one_of_args_exist("build_release") then
+    darwin.dtw.copy_any_overwriting("extra/starter.lua","release/Mdeclare/Mdeclare.lua")
+
+    -- Create a new container machine
+    local machine = darwin.ship.create_machine("debian:latest")
+    -- Configure container runtime
+    machine.provider = darwin.argv.get_flag_arg_by_index({ "provider"},1, "docker")
+    -- Add build-time commands
+    machine.add_comptime_command("apt update")
+    machine.add_comptime_command("apt install -y gcc")
+    
+    machine.start({
+        flags = {
+            "--network=host"
+        },
+        volumes = {
+            { ".", "/output" }
+        },
+        command = "gcc -shared -fpic /output/luamdeclare.c -o /output/release/Mdeclare/Mdeclare.so"
+    })
+
+    builded = true
+end
+
+if builded then
+    os.execute("cd release && zip -r Mdeclare.zip Mdeclare")
+end

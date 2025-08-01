@@ -14,7 +14,7 @@ LuaCEmbedResponse  *luamdeclare_transform_dir(LuaCEmbed *args) {
         char *error_msg = LuaCEmbed_get_error_message(args);
         return LuaCEmbed_send_error(error_msg);
     }
-    char *dir = LuaCEmbedTable_get_string(entries, "dir");
+    char *dir = LuaCembedTable_get_string_prop(entries, "dir");
 
     if(LuaCEmbed_has_errors(args)) {
         char *error_msg = LuaCEmbed_get_error_message(args);
