@@ -24,7 +24,7 @@ else
     lib_path = path.."Mdeclare.dll"
 end 
 
-local load_lua = package.loadlib(lib_path, "load_Mdeclare")
+local load_lua = package.loadlib(lib_path, "luaopen_luamdeclare")
 
 ---@type MdeclareModule
 local lib = load_lua()
