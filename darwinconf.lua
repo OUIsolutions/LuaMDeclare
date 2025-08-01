@@ -56,5 +56,8 @@ if darwin.argv.one_of_args_exist("build_release") then
 end
 
 if builded then
+    local content = darwin.dtw.load_file("luamdeclare.c")
+    content = "#define LUAMDECLARE_NOT_INCLUDE_DEPS\n"..content
+    darwin.dtw.write_file("release/luamdeclare.c", content)
     os.execute("cd release && zip -r Mdeclare.zip Mdeclare")
 end
